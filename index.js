@@ -4,8 +4,7 @@ require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
-// task-management-DB-user
-// zFS2mXTn8bk89Ct7
+
 app.use(cors());
 app.use(express.json());
 
@@ -23,7 +22,6 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
 
     const database = client.db("task_management_DB");
     const taskCollection = database.collection("tasks");
@@ -69,12 +67,6 @@ async function run() {
       const result = await taskCollection.deleteOne(query);
       res.send(result);
     });
-
-    // Send a ping to confirm a successful connection
-    // await client.db("admin").command({ ping: 1 });
-    // console.log(
-    //   "Pinged your deployment. You successfully connected to MongoDB!"
-    // );
   } finally {
   }
 }
